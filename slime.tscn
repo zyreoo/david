@@ -56,6 +56,7 @@ position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_2002g")
 autoplay = "default"
 frame_progress = 0.5641426
+flip_h = true
 
 [node name="killzone" parent="." instance=ExtResource("2_4l1t8")]
 
