@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://1x5v2og6yriv"]
+[gd_scene load_steps=15 format=3 uid="uid://1x5v2og6yriv"]
 
 [ext_resource type="Texture2D" uid="uid://cajs5kqfcgyys" path="res://Screenshot 2025-12-08 195332.png" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://d30kfbh7qsmnk" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="FontFile" uid="uid://4cim6ptqsfjj" path="res://GrapeSoda.ttf" id="2_7vrkn"]
 [ext_resource type="AudioStream" uid="uid://dn3n1aqsuqycu" path="res://assets/brackeys_platformer_assets/music/time_for_adventure.mp3" id="4_jix8l"]
 [ext_resource type="Script" uid="uid://buld6tnoupn00" path="res://audio_control.gd" id="5_glbon"]
+[ext_resource type="Script" uid="uid://dep3k3314r1q5" path="res://fullscreencontrol.gd" id="6_nlkkf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]
 texture = ExtResource("1_06t4h")
@@ -209,22 +210,53 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7vrkn")
 text = "Back"
 
-[node name="AudioControl" type="HSlider" parent="Options"]
-layout_mode = 0
-offset_left = 85.0
-offset_top = 73.0
-offset_right = 421.0
-offset_bottom = 147.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -97.5
+offset_right = 152.0
+offset_bottom = 97.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="AudioControl" type="HSlider" parent="Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/slider = SubResource("StyleBoxLine_jix8l")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_glbon")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_nlkkf")
-min_value = -15.0
-max_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 script = ExtResource("5_glbon")
 audio_bus_name = "music"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="fullscreencontrol" type="CheckButton" parent="Options/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Fullscreen"
+script = ExtResource("6_nlkkf")
 
 [connection signal="pressed" from="main buttons/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="main buttons/Button3" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="main buttons/Button2" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Options/Back" to="." method="_on_back_options_pressed"]
-[connection signal="value_changed" from="Options/AudioControl" to="Options/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer/AudioControl" to="Options/VBoxContainer/HBoxContainer/AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="Options/VBoxContainer/HBoxContainer3/fullscreencontrol" to="Options/VBoxContainer/HBoxContainer3/fullscreencontrol" method="_on_toggled"]
