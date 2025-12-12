@@ -15,7 +15,7 @@ func _process(_delta):
 
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://node_2d.tscn")
+	get_tree().change_scene_to_file("res://scenes/level_1.tscn")
 
 
 func _on_options_pressed():
@@ -29,3 +29,18 @@ func _on_exit_pressed():
 
 func _on_back_options_pressed() -> void:
 	_ready()
+
+
+func _on_level_1_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/level_1.tscn")
+
+
+func _on_level_2_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/level_3.tscn")
+
+func _on_level_3_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/level_2.tscn")
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"): # ESC
+		get_tree().change_scene_to_file("res://Menu.tscn")
