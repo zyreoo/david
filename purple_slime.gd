@@ -11,12 +11,12 @@ var direction = 1
 # Called every fram. "delta"  is the elapsed time since the previous frame
 func _process(delta):
 	if  ray_cast_2d_right.is_colliding():
-		direction = 1
+		direction = -1
 		animated_sprite.flip_h = true
 		print("direction changed right")
 
 	if ray_cast_2d_left.is_colliding():
-		direction = -1
+		direction = 1
 		animated_sprite.flip_h = false
 		print("direction changed left")
 
